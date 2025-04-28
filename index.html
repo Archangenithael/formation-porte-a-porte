@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Immobilière - Module 3: Prospection physique et téléphonique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        'primary': '#4F46E5',
+                        'secondary': '#10B981',
+                        'accent': '#F59E0B',
+                        'light': '#E5E7EB',
+                        'dark': '#111827',
+                        'darker': '#0B0F1A',
+                        'darkgray': '#1F2937',
+                        'darkaccent': '#2D3748'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #111827;
+            color: #E5E7EB;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #4F46E5, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(145deg, rgba(79, 70, 229, 0.95), rgba(16, 185, 129, 0.85));
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            background-color: #1F2937;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .animated-underline {
+            position: relative;
+        }
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(to right, #4F46E5, #10B981);
+            transition: width 0.4s ease;
+        }
+
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-btn:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .ripple-btn:focus:after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        /* Animation sur le scroll */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #4F46E5, #10B981);
+        }
+
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+            background: #F59E0B;
+            border: 2px solid #1F2937;
+            box-shadow: 0 0 0 2px #F59E0B;
+        }
+
+        #navbar {
+            transition: all 0.3s ease;
+        }
+
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.5s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Curseur personnalisé */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(16, 185, 129, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        .cursor-hover {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(79, 70, 229, 0.3);
+        }
+    </style>
+    <meta name="description" content="Formation immobilière porte à porte ">
+</head>
+<body class="bg-dark text-light overflow-x-hidden">
+    <div id="customCursor" class="custom-cursor hidden md:block"></div>
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-darker py-4 transition-all duration-300">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-3xl font-bold font-playfair text-primary mr-2">ImmoFormation</div>
+                    <span class="text-secondary text-sm font-semibold hidden md:inline-block">Excellence Immobilière</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#modules" class="text-light hover:text-primary transition-colors duration-300 animated-underline">Nos Modules</a>
+                    <a href="#programme" class="text-light hover:text-primary transition-colors duration-300 animated-underline">Programme</a>
+                    <a href="#pedagogie" class="text-light hover:text-primary transition-colors duration-300 animated-underline">Pédagogie</a>
+                    <a href="#temoignages" class="text-light hover:text-primary transition-colors duration-300 animated-underline">Témoignages</a>
+                    <a href="#faq" class="text-light hover:text-primary transition-colors duration-300 animated-underline">FAQ</a>
+                    <a href="#contact" class="ml-4 px-5 py-2 bg-accent text-dark rounded-full font-semibold hover:bg-accent/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 ripple-btn">S'inscrire</a>
+                </div>
+                <button class="md:hidden text-light text-xl" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Menu mobile -->
+        <div id="mobileMenu" class="md:hidden hidden bg-darker w-full absolute left-0 shadow-lg py-4 z-50">
+            <div class="container mx-auto px-4 flex flex-col space-y-4">
+                <a href="#modules" class="text-light hover:text-primary py-2 px-4 rounded transition-colors duration-300">Nos Modules</a>
+                <a href="#programme" class="text-light hover:text-primary py-2 px-4 rounded transition-colors duration-300">Programme</a>
+                <a href="#pedagogie" class="text-light hover:text-primary py-2 px-4 rounded transition-colors duration-300">Pédagogie</a>
+                <a href="#temoignages" class="text-light hover:text-primary py-2 px-4 rounded transition-colors duration-300">Témoignages</a>
+                <a href="#faq" class="text-light hover:text-primary py-2 px-4 rounded transition-colors duration-300">FAQ</a>
+                <a href="#contact" class="bg-accent text-dark py-2 px-4 rounded-full text-center font-semibold">S'inscrire</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative hero-gradient text-white overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://d1olmvoet3matb.cloudfront.net/lKK90NkWZ4/images/b5041f77ded355ea.jpeg')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+        <div class="absolute -bottom-1 left-0 w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#111827" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,165.3C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,170.7C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <div class="container mx-auto px-4 md:px-8 pt-24 pb-32 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <div class="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-4">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Module 3 - Formation Elite</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair mb-6 leading-tight">
+                        Maîtrisez l'Art de la <span class="relative inline-block">
+                            <span class="relative z-10">Prospection</span>
+                            <span class="absolute bottom-2 left-0 w-full h-3 bg-accent/30 -z-0"></span>
+                        </span> Immobilière
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 text-white/90 max-w-xl">
+                        Développez des compétences avancées en démarchage physique et téléphonique pour transformer vos contacts en mandats exclusifs et booster votre carrière d'agent immobilier.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="px-8 py-4 bg-accent text-dark rounded-full font-semibold text-center transform transition-all hover:scale-105 hover:shadow-lg shadow-md ripple-btn">
+                            Réserver ma place <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#programme" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-semibold text-center border-2 border-white/30 hover:bg-white/20 transition-all">
+  Découvrir le programme <i class="fas fa-chevron-down ml-2"></i>
+</a>
+                    </div>
+                    <div class="mt-8 flex items-center text-white/70">
+                        <i class="fas fa-certificate text-accent mr-2"></i>
+                        <span>Formation certifiante - 8 heures</span>
+                        <span class="mx-3">|</span>
+                        <i class="fas fa-users text-accent mr-2"></i>
+                        <span>Places limitées</span>
+                    </div>
+                </div>
+                <div class="relative float-animation hidden md:block">
+                    <div class="absolute inset-0 bg-primary/20 backdrop-blur-sm rounded-xl transform rotate-3"></div>
+                    <img src="https://d1olmvoet3matb.cloudfront.net/lKK90NkWZ4/images/b5041f77ded355ea.jpeg" alt="Prospection immobilière" class="relative rounded-xl shadow-2xl z-10 transform -rotate-3 hover:rotate-0 transition-all duration-300">
+                    <div class="absolute -top-5 -right-5 bg-accent text-dark rounded-full h-24 w-24 flex items-center justify-center shadow-lg transform rotate-12 font-bold">
+                        <div class="text-center">
+                            <div class="text-xl">2025</div>
+                            <div class="text-xs">Édition</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avantages Section -->
+    <section class="py-20 bg-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text font-playfair mb-4">Pourquoi Choisir Notre Formation ?</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto">Une formation immersive et pratique conçue pour vous démarquer dans un marché compétitif.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-darkgray p-8 rounded-xl shadow-lg hover:shadow-xl transition-all card fade-in">
+                    <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-trophy text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-light">Expertise Reconnue</h3>
+                    <p class="text-gray-300">Nos formateurs cumulent plus de 15 ans d'expérience dans le secteur immobilier et la prospection commerciale.</p>
+                </div>
+                <div class="bg-darkgray p-8 rounded-xl shadow-lg hover:shadow-xl transition-all card fade-in" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-hands-helping text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-light">Approche Pratique</h3>
+                    <p class="text-gray-300">50% du temps de formation consacré à des mises en situation réelles et jeux de rôle filmés et analysés.</p>
+                </div>
+                <div class="bg-darkgray p-8 rounded-xl shadow-lg hover:shadow-xl transition-all card fade-in" style="transition-delay: 0.4s;">
+                    <div class="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-light">Résultats Concrets</h3>
+                    <p class="text-gray-300">En moyenne, nos participants augmentent leur taux de transformation de 30% dans les 3 mois suivant la formation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section id="modules" class="py-20 bg-darker">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="px-4 py-1 rounded-full bg-primary/20 text-primary text-sm font-semibold uppercase tracking-wider">Parcours complet</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 gradient-text font-playfair">Notre Cursus de Formation</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-4">Un programme complet en trois modules pour maîtriser toutes les facettes de la prospection immobilière moderne.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Module 1 -->
+                <div class="bg-darkgray rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all card fade-in">
+                    <div class="h-48 bg-gradient-to-r from-blue-800 to-blue-600 flex items-center justify-center relative">
+    <canvas id="barometerCanvas" width="150" height="150"></canvas>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('barometerCanvas');
+            const ctx = canvas.getContext('2d');
+            let value = 0;
+            let targetValue = 75;
+            
+            function drawBarometer() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Cercle externe
+                ctx.beginPath();
+                ctx.arc(75, 75, 70, 0, Math.PI * 2);
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.stroke();
+                
+                // Arc de progression
+                const angle = (value / 100) * Math.PI * 1.5;
+                ctx.beginPath();
+                ctx.arc(75, 75, 70, Math.PI * 0.75, Math.PI * 0.75 + angle);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
+                ctx.stroke();
+                
+                // Aiguille
+                ctx.save();
+                ctx.translate(75, 75);
+                ctx.rotate(Math.PI * 0.75 + angle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(0, -55);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = 'rgba(255, 200, 0, 0.9)';
+                ctx.stroke();
+                ctx.restore();
+                
+                // Centre
+                ctx.beginPath();
+                ctx.arc(75, 75, 8, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.fill();
+                
+                // Valeur
+                ctx.font = 'bold 20px Arial';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.textAlign = 'center';
+                ctx.fillText(Math.round(value) + '%', 75, 110);
+            }
+            
+            function animate() {
+                if (Math.abs(value - targetValue) > 0.5) {
+                    value += (targetValue - value) * 0.1;
+                } else {
+                    value = targetValue;
+                    setTimeout(() => {
+                        targetValue = Math.random() * 100;
+                    }, 3000);
+                }
+                
+                drawBarometer();
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        });
+    </script>
+</div>
+                    <div class="p-6">
+                        <div class="inline-block px-3 py-1 rounded-full bg-blue-900 text-blue-300 text-xs font-semibold mb-4">Module 1</div>
+                        <h3 class="text-xl font-bold mb-3 text-light">Revalorisation de Portefeuille</h3>
+                        <p class="text-gray-300 mb-4">Apprenez à utiliser l'Immomètre pour analyser et optimiser la valeur de votre portefeuille immobilier.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
+                                <span class="text-gray-300">Analyse de marché approfondie</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
+                                <span class="text-gray-300">Évaluation précise des biens</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
+                                <span class="text-gray-300">Stratégies de revalorisation</span>
+                            </li>
+                        </ul>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Durée: 1 journée</span>
+                            <a href="#contact" class="text-blue-400 hover:text-blue-300 font-semibold flex items-center">
+                                En savoir plus <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Module 2 -->
+                <div class="bg-darkgray rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all card fade-in" style="transition-delay: 0.2s;">
+                    <div class="h-48 bg-gradient-to-r from-green-800 to-green-600 flex items-center justify-center">
+                        <i class="fas fa-map-marked-alt text-6xl text-white/80"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="inline-block px-3 py-1 rounded-full bg-green-900 text-green-300 text-xs font-semibold mb-4">Module 2</div>
+                        <h3 class="text-xl font-bold mb-3 text-light">Cartographie Immobilière</h3>
+                        <p class="text-gray-300 mb-4">Maîtrisez l'analyse cartographique des ventes immobilières dans votre commune pour cibler efficacement.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span class="text-gray-300">Outils cartographiques avancés</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span class="text-gray-300">Analyse des zones à potentiel</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span class="text-gray-300">Stratégies de prospection ciblée</span>
+                            </li>
+                        </ul>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Durée: 1 journée</span>
+                            <a href="#contact" class="text-green-400 hover:text-green-300 font-semibold flex items-center">
+                                En savoir plus <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Module 3 (Actuel) -->
+                <div class="bg-primary/10 rounded-xl overflow-hidden shadow-2xl hover:shadow-2xl transition-all transform scale-105 card relative fade-in" style="transition-delay: 0.4s;">
+                    <div class="absolute top-0 right-0 bg-accent text-dark px-4 py-1 rounded-bl-lg font-semibold z-10">
+                        En cours
+                    </div>
+                    <div class="h-48 bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
+                        <i class="fas fa-phone-alt text-6xl text-white/80"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-semibold mb-4">Module 3</div>
+                        <h3 class="text-xl font-bold mb-3 text-light">Prospection Physique et Téléphonique</h3>
+                        <p class="text-gray-300 mb-4">Perfectionnez vos techniques de démarchage pour transformer vos contacts en mandats exclusifs.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span class="text-gray-300">Scripts d'appels optimisés</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span class="text-gray-300">Gestion des objections</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span class="text-gray-300">Techniques de closing efficaces</span>
+                            </li>
+                        </ul>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Durée: 1 journée</span>
+                            <a href="#programme" class="text-primary hover:text-primary/80 font-semibold flex items-center">
+                                Programme détaillé <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programme Section -->
+    <section id="programme" class="py-20 bg-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="px-4 py-1 rounded-full bg-primary/20 text-primary text-sm font-semibold uppercase tracking-wider">Module 3</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 gradient-text font-playfair">Programme Détaillé</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-4">Une journée intensive pour maîtriser l'art de la prospection immobilière et transformer vos contacts en opportunités d'affaires.</p>
+            </div>
+            
+            <!-- Information générale -->
+            <div class="bg-darkgray rounded-xl p-8 shadow-lg mb-12 fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-primary">Informations Générales</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 shrink-0">
+                            <i class="fas fa-clock text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1 text-light">Durée</h4>
+                            <p class="text-gray-300">8 heures (1 journée)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 shrink-0">
+                            <i class="fas fa-users text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1 text-light">Public cible</h4>
+                            <p class="text-gray-300">Professionnels de l'immobilier</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 shrink-0">
+                            <i class="fas fa-list-check text-primary"></i>
+                        </div>
+                        <div>
+    <h4 class="font-semibold text-lg mb-1 text-light">Suggestions</h4>
+    <p class="text-gray-300">Avoir suivi les Modules 1 et 2</p>
+</div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 shrink-0">
+                            <i class="fas fa-medal text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1 text-light">Certification</h4>
+                            <p class="text-gray-300">Attestation de réussite délivrée</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Objectifs pédagogiques -->
+            <div class="bg-darkgray rounded-xl p-8 shadow-lg mb-12 fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-primary">Objectifs Pédagogiques</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                            <span class="text-secondary font-bold">1</span>
+                        </div>
+                        <p class="text-gray-300">Maîtriser les techniques de prospection en porte-à-porte et par téléphone</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                            <span class="text-secondary font-bold">2</span>
+                        </div>
+                        <p class="text-gray-300">Développer un argumentaire adapté à chaque situation de prospection</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                            <span class="text-secondary font-bold">3</span>
+                        </div>
+                        <p class="text-gray-300">Savoir gérer les objections courantes des propriétaires</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                            <span class="text-secondary font-bold">4</span>
+                        </div>
+                        <p class="text-gray-300">Augmenter son taux de transformation en rendez-vous et mandats</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Programme détaillé avec onglets -->
+            <div class="mb-12 fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-primary">Programme de la Journée</h3>
+                <div class="bg-darkgray rounded-xl shadow-lg overflow-hidden">
+                    <div class="flex flex-wrap text-sm font-medium text-center border-b border-darkaccent" id="tabMenu">
+                        <button class="tab-btn active px-6 py-4 text-gray-300 hover:text-primary flex-grow md:flex-grow-0" data-target="matin">
+                            <i class="fas fa-sun mr-2"></i> Matinée - Principes Théoriques
+                        </button>
+                        <button class="tab-btn px-6 py-4 text-gray-300 hover:text-primary flex-grow md:flex-grow-0" data-target="apresmidi">
+                            <i class="fas fa-moon mr-2"></i> Après-midi - Mises en Situation
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content active p-6" id="matin">
+                        <h4 class="text-xl font-bold mb-4 text-light">Matinée (4 heures) - Principes Théoriques du Démarchage</h4>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">1. Introduction et Rappel des Modules Précédents (30 min)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Tour de table et retour d'expérience</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Rappel des acquis du Module 2 sur la recherche d'adresses</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Présentation des objectifs du Module 3</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">2. Fondamentaux de la Prospection Immobilière (45 min)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Définition et importance de la prospection dans le cycle de vente</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Les différents types de prospection</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Statistiques et taux de conversion par méthode</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">3. Préparation à la Prospection (45 min)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Organisation et planification des actions</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Préparation mentale et gestion du stress</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Outils et supports nécessaires</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Aspects juridiques et réglementaires</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">4. Techniques de Communication Persuasive (1h)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Principes de la communication efficace</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Écoute active et questionnement</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Langage verbal et non-verbal</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Techniques d'accroche et de présentation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">5. Les 3 Versions de Démarchage sur le Terrain (1h)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Version 1 : Propriétaires ayant effectué un DPE</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Version 2 : Annonces récentes (moins d'une semaine)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Version 3 : Annonces "placard" (plus de 3 mois)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content hidden p-6" id="apresmidi">
+                        <h4 class="text-xl font-bold mb-4 text-light">Après-midi (4 heures) - Mises en Situation Pratiques</h4>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">1. Préparation aux Jeux de Rôle (30 min)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Constitution des groupes</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Explication des scénarios</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Distribution des rôles et des fiches d'évaluation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">2. Jeux de Rôle - Version 1 : Propriétaires avec DPE (1h)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Briefing spécifique (10 min)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Mise en situation par groupes (30 min)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Débriefing et analyse des performances (20 min)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">3. Jeux de Rôle - Version 2 : Annonces Récentes (1h)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Briefing spécifique (10 min)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Mise en situation par groupes (30 min)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Débriefing et analyse des performances (20 min)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">4. Jeux de Rôle - Version 3 : Annonces "Placard" (1h)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Briefing spécifique (10 min)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Mise en situation par groupes (30 min)</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Débriefing et analyse des performances (20 min)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="text-lg font-semibold text-primary">5. Conclusion et Plan d'Action (30 min)</h5>
+                            <ul class="mt-2 ml-2 space-y-2 text-gray-300">
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Synthèse des apprentissages</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Élaboration d'un plan d'action personnel</li>
+                                <li><i class="fas fa-angle-right text-secondary mr-2"></i> Évaluation de la formation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approche pédagogique -->
+    <section id="pedagogie" class="py-20 bg-darker">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="px-4 py-1 rounded-full bg-secondary/20 text-secondary text-sm font-semibold uppercase tracking-wider">Notre méthode</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 gradient-text font-playfair">Approche Pédagogique</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-4">Une formation immersive combinant théorie, pratique et suivi personnalisé pour garantir vos résultats.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="order-2 md:order-1 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">Méthodes Pédagogiques Innovantes</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                                <i class="fas fa-chalkboard-teacher text-secondary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1 text-light">Exposés Théoriques Interactifs</h4>
+                                <p class="text-gray-300">Des présentations dynamiques ponctuées d'échanges et d'exemples concrets issus du terrain.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                                <i class="fas fa-users text-secondary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1 text-light">Échanges d'Expériences</h4>
+                                <p class="text-gray-300">Partage des bonnes pratiques et analyse des situations vécues par les participants.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                                <i class="fas fa-theater-masks text-secondary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1 text-light">Jeux de Rôle Filmés</h4>
+                                <p class="text-gray-300">Mise en situation réaliste avec analyse vidéo pour identifier les axes d'amélioration.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mr-4 shrink-0">
+                                <i class="fas fa-user-check text-secondary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1 text-light">Coaching Individualisé</h4>
+                                <p class="text-gray-300">Feedback personnalisé et conseils adaptés au profil et aux objectifs de chaque participant.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 float-animation fade-in">
+                    <img src="https://d1olmvoet3matb.cloudfront.net/lKK90NkWZ4/images/d7b862b3dda38987.jpeg" alt="Méthodes pédagogiques" class="rounded-xl shadow-xl mx-auto">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="float-animation fade-in">
+                    <img src="https://d1olmvoet3matb.cloudfront.net/lKK90NkWZ4/images/b655f75c7e58e84b.jpeg" alt="Supports pédagogiques" class="rounded-xl shadow-xl mx-auto">
+                </div>
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-primary">Supports Pédagogiques Fournis</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
+                            <h4 class="font-semibold mb-1 text-light">Présentation PowerPoint</h4>
+                            <p class="text-gray-300">Support visuel complet couvrant l'ensemble des concepts théoriques.</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
+                            <h4 class="font-semibold mb-1 text-light">Fiches de Rôle et Grilles d'Évaluation</h4>
+                            <p class="text-gray-300">Outils structurés pour maximiser l'efficacité des mises en situation.</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
+                            <h4 class="font-semibold mb-1 text-light">Template de Plan d'Action Personnel</h4>
+                            <p class="text-gray-300">Document guidé pour transformer les apprentissages en actions concrètes.</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
+                            <h4 class="font-semibold mb-1 text-light">Fiches Récapitulatives</h4>
+                            <p class="text-gray-300">Synthèse des arguments clés et réponses aux objections les plus courantes.</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
+                            <h4 class="font-semibold mb-1 text-light">Documentation Juridique</h4>
+                            <p class="text-gray-300">Ressources sur les aspects légaux et réglementaires du démarchage immobilier.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section id="temoignages" class="py-20 bg-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                
+                
+                
+                
+            </div>
+            
+            <div class="mt-12 flex justify-center fade-in">
+                <a href="#contact" class="px-8 py-4 bg-accent text-dark rounded-full font-semibold shadow-md hover:shadow-lg transition-all hover:scale-105 flex items-center">
+                    <i class="fas fa-user-plus mr-2"></i> Rejoignez nos participants satisfaits
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-darker">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="px-4 py-1 rounded-full bg-primary/20 text-primary text-sm font-semibold uppercase tracking-wider">Questions fréquentes</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 gradient-text font-playfair">Foire Aux Questions</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-4">Retrouvez les réponses aux questions les plus courantes concernant notre formation.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto fade-in">
+                <div class="mb-6">
+                    <button class="faq-btn w-full flex justify-between items-center bg-darkgray p-5 rounded-xl hover:bg-primary/10 transition-colors">
+                        <span class="font-semibold text-lg text-light">Est-il vraiment nécessaire de suivre les Modules 1 et 2 avant le Module 3 ?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-2 p-5 bg-darkaccent rounded-b-xl border-t border-darker">
+                        <p class="text-gray-300">Oui, les modules sont conçus comme un parcours progressif. Les Modules 1 et 2 vous fournissent des outils essentiels pour identifier les opportunités et cibler efficacement votre prospection, compétences qui seront directement mobilisées dans le Module 3. Cependant, si vous avez déjà une expérience significative dans ces domaines, contactez-nous pour étudier votre situation.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="faq-btn w-full flex justify-between items-center bg-darkgray p-5 rounded-xl hover:bg-primary/10 transition-colors">
+                        <span class="font-semibold text-lg text-light">Cette formation est-elle adaptée aux débutants dans l'immobilier ?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-2 p-5 bg-darkaccent rounded-b-xl border-t border-darker">
+                        <p class="text-gray-300">Cette formation est conçue pour des professionnels ayant déjà une première expérience dans l'immobilier. Pour les débutants, nous recommandons notre cycle "Fondamentaux de l'immobilier" qui constitue une excellente préparation avant d'aborder les techniques avancées de prospection.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="faq-btn w-full flex justify-between items-center bg-darkgray p-5 rounded-xl hover:bg-primary/10 transition-colors">
+                        <span class="font-semibold text-lg text-light">Comment se déroulent les mises en situation pratiques ?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-2 p-5 bg-darkaccent rounded-b-xl border-t border-darker">
+                        <p class="text-gray-300">Les mises en situation se déroulent en petits groupes de 3 personnes où chacun joue alternativement le rôle de l'agent, du propriétaire et de l'observateur. Chaque scénario est filmé (avec votre accord) pour permettre une analyse approfondie. Le formateur circule entre les groupes pour apporter conseils et retours personnalisés.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="faq-btn w-full flex justify-between items-center bg-darkgray p-5 rounded-xl hover:bg-primary/10 transition-colors">
+                        <span class="font-semibold text-lg text-light">Existe-t-il un suivi après la formation ?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-2 p-5 bg-darkaccent rounded-b-xl border-t border-darker">
+                        <p class="text-gray-300">Oui, nous proposons un suivi personnalisé pendant 3 mois après la formation. Cela inclut un appel mensuel de coaching individuel, l'accès à notre plateforme d'e-learning avec des ressources complémentaires, et l'intégration à notre communauté privée où vous pourrez échanger avec d'autres participants et nos formateurs.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="faq-btn w-full flex justify-between items-center bg-darkgray p-5 rounded-xl hover:bg-primary/10 transition-colors">
+                        <span class="font-semibold text-lg text-light">La formation est-elle disponible en ligne ou uniquement en présentiel ?</span>
+                        <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden mt-2 p-5 bg-darkaccent rounded-b-xl border-t border-darker">
+                        <p class="text-gray-300">Le Module 3, en raison de sa forte composante pratique et interactive, est principalement dispensé en présentiel pour garantir une expérience d'apprentissage optimale. Cependant, nous proposons quelques sessions en format hybride avec une partie théorique en ligne et les mises en pratique en présentiel. Contactez-nous pour connaître le calendrier de ces sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 md:px-8 text-center">
+            <div class="max-w-3xl mx-auto fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-playfair">Prêt à Révolutionner Votre Approche de la Prospection ?</h2>
+                <p class="text-xl mb-8 text-white/90">Les prochaines sessions affichent souvent complet plusieurs semaines à l'avance. Réservez dès maintenant pour garantir votre place.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                        <span class="text-xl font-bold">Paris</span>
+                        <span class="text-white/80">17-18 Mai 2025</span>
+                        <span class="bg-accent/80 px-2 py-1 rounded text-xs font-semibold mt-2 text-dark">5 places restantes</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                        <span class="text-xl font-bold">Lyon</span>
+                        <span class="text-white/80">7-8 Juin 2025</span>
+                        <span class="bg-accent/80 px-2 py-1 rounded text-xs font-semibold mt-2 text-dark">8 places restantes</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                        <span class="text-xl font-bold">Bordeaux</span>
+                        <span class="text-white/80">21-22 Juin 2025</span>
+                        <span class="bg-accent/80 px-2 py-1 rounded text-xs font-semibold mt-2 text-dark">3 places restantes</span>
+                    </div>
+                </div>
+                <a href="#contact" class="inline-block px-8 py-4 bg-dark text-light rounded-full font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105 ripple-btn">
+                    <i class="fas fa-graduation-cap mr-2"></i> S'inscrire à la prochaine session
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire de contact -->
+    <section id="contact" class="py-20 bg-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="px-4 py-1 rounded-full bg-secondary/20 text-secondary text-sm font-semibold uppercase tracking-wider">Inscription</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 gradient-text font-playfair">Réservez Votre Place</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-4">Complétez le formulaire ci-dessous pour vous inscrire ou demander plus d'informations.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="fade-in">
+                    
+                </div>
+                
+                <div class="fade-in">
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="text-3xl font-bold font-playfair mb-4">ImmoFormation</div>
+                    <p class="text-gray-400 mb-6">Excellence dans la formation des professionnels de l'immobilier depuis 2010.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-darkgray flex items-center justify-center hover:bg-primary transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-darkgray flex items-center justify-center hover:bg-primary transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-darkgray flex items-center justify-center hover:bg-primary transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-darkgray flex items-center justify-center hover:bg-primary transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#modules" class="text-gray-400 hover:text-white transition-colors">Nos Modules</a></li>
+                        <li><a href="#programme" class="text-gray-400 hover:text-white transition-colors">Programme</a></li>
+                        <li><a href="#pedagogie" class="text-gray-400 hover:text-white transition-colors">Pédagogie</a></li>
+                        <li><a href="#temoignages" class="text-gray-400 hover:text-white transition-colors">Témoignages</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Nos Formations</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Module 1 - Revalorisation de Portefeuille</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Module 2 - Cartographie Immobilière</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Module 3 - Prospection</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Formation sur mesure</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Coaching individuel</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">123 Avenue de l'Immobilier<br>75008 Paris, France</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-primary mr-3"></i>
+                            <span class="text-gray-400">01 23 45 67 89</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span class="text-gray-400">contact@immoformation.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-darkaccent pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 ImmoFormation. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 text-sm hover:text-white transition-colors">Politique de confidentialité</a>
+                    <a href="#" class="text-gray-500 text-sm hover:text-white transition-colors">Conditions générales</a>
+                    <a href="#" class="text-gray-500 text-sm hover:text-white transition-colors">Mentions légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation au scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu mobile
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                } else {
+                    menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                }
+            });
+            
+            // Navbar sticky
+            const navbar = document.getElementById('navbar');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    navbar.classList.add('sticky-nav');
+                } else {
+                    navbar.classList.remove('sticky-nav');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+            
+            // Animation fade-in au scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // Onglets du programme
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    tabBtns.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Cacher tous les contenus
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Afficher le contenu correspondant
+                    const target = this.getAttribute('data-target');
+                    document.getElementById(target).classList.remove('hidden');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // FAQ accordéon
+            const faqBtns = document.querySelectorAll('.faq-btn');
+            
+            faqBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const content = this.nextElementSibling;
+                    
+                    // Toggle l'affichage du contenu
+                    content.classList.toggle('hidden');
+                    
+                    // Rotate l'icône
+                    if (content.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+            
+            // Liens d'ancrage avec défilement doux
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (!targetElement) return;
+                    
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Fermer le menu mobile si ouvert
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            });
+            
+            // Custom cursor
+            const cursor = document.getElementById('customCursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            document.querySelectorAll('a, button, input, textarea, select').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    cursor.classList.add('cursor-hover');
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-hover');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
