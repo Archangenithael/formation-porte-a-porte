@@ -764,10 +764,60 @@
                 <div class="fade-in">
                     <h3 class="text-2xl font-bold mb-6 text-primary">Supports Pédagogiques Fournis</h3>
                     <div class="space-y-4">
-                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
-                            <h4 class="font-semibold mb-1 text-light">Présentation PowerPoint</h4>
-                            <p class="text-gray-300">Support visuel complet couvrant l'ensemble des concepts théoriques.</p>
-                        </div>
+                        <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary pacman-frame">
+    <h4 class="font-semibold mb-1 text-light">Présentation PowerPoint</h4>
+    <p class="text-gray-300">Support visuel complet couvrant l'ensemble des concepts théoriques.</p>
+    <div class="pacman"></div>
+    <style>
+        .pacman-frame{
+            position:relative;
+            overflow:hidden;
+        }
+        .pacman{
+            position:absolute;
+            width:22px;
+            height:22px;
+            background:#ffeb3b;
+            border-radius:50%;
+            animation:pac-travel 6s linear infinite, pac-eat 0.35s infinite alternate;
+        }
+        @keyframes pac-eat{
+            0%{
+                clip-path:polygon(0% 0%,100% 20%,100% 80%,0% 100%);
+            }
+            100%{
+                clip-path:polygon(0% 0%,100% 45%,100% 55%,0% 100%);
+            }
+        }
+        @keyframes pac-travel{
+            0%{
+                top:-12px;
+                left:-12px;
+                transform:rotate(45deg);
+            }
+            25%{
+                top:-12px;
+                left:calc(100% - 10px);
+                transform:rotate(135deg);
+            }
+            50%{
+                top:calc(100% - 10px);
+                left:calc(100% - 10px);
+                transform:rotate(225deg);
+            }
+            75%{
+                top:calc(100% - 10px);
+                left:-12px;
+                transform:rotate(315deg);
+            }
+            100%{
+                top:-12px;
+                left:-12px;
+                transform:rotate(405deg);
+            }
+        }
+    </style>
+</div>
                         <div class="p-4 rounded-lg bg-darkgray border-l-4 border-secondary">
                             <h4 class="font-semibold mb-1 text-light">Fiches de Rôle et Grilles d'Évaluation</h4>
                             <p class="text-gray-300">Outils structurés pour maximiser l'efficacité des mises en situation.</p>
